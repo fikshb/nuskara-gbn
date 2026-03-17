@@ -153,8 +153,8 @@ const en: Translations = {
     headline: "Foundation of the",
     headlineHighlight: "Nuskara Ecosystem",
     description: [
-      "Established in 2013, PT Garuda Bakti Nusantara is the foundation company of the Nuskara group. As the pioneer entity, GBN laid the groundwork for what would become an integrated mining ecosystem spanning 8 subsidiaries across Indonesia.",
-      "With a focus on reliability, safety, and operational excellence, GBN has built a comprehensive logistics network that supports the entire mining supply chain, from material procurement to final delivery.",
+      "Established in 2013, PT Garuda Bakti Nusantara is the foundation company of the Nuskara group. Licensed by the Indonesian National Police (Polri), GBN maintains consistent practices in security and safety assurance for its logistics fleet operations.",
+      "As a trusted logistics partner for companies in the general mining industry for commercial explosives logistics services, GBN offers integrated logistics solutions for oil and gas companies in Indonesia, particularly in production and exploration activities. Full permit management for logistics and transportation across Indonesia.",
     ],
     stats: [
       { value: 2013, suffix: "", label: "Established" },
@@ -205,14 +205,13 @@ const en: Translations = {
         ],
       },
       {
-        title: "Production & Operations",
+        title: "Occupational Health & Safety",
         description:
-          "Official operator in the production and transport of commercial explosives since 2014. End to end supply chain management.",
+          "Over 10 years of consistent implementation of OHS principles in commercial explosives transportation services.",
         bullets: [
-          "Licensed explosives production operator",
-          "Supply chain management integration",
-          "Quality control and compliance",
-          "Nationwide distribution coverage",
+          "Consistent K3 implementation in explosives transport for over a decade",
+          "Logistics security quality control and regulatory compliance",
+          "Internal audit implementation for K3 assurance",
         ],
       },
     ],
@@ -260,24 +259,24 @@ const en: Translations = {
       "Our operations are driven by advanced management systems that ensure efficiency, accuracy, and real time visibility across the entire supply chain.",
     systems: [
       {
-        title: "Warehouse Management System",
-        description: "Provides accurate inventory level management and comprehensive reporting for all warehousing operations across locations.",
-        icon: "warehouse",
+        title: "Intermodal Mining Logistics Network",
+        description: "Strategic vendor network providing combined transportation fleet and handling services across Sumatra, Kalimantan, and Sulawesi.",
+        icon: "network",
       },
       {
-        title: "Electronic Data Interchange",
-        description: "Computerized order processing with real time control systems that prevent backlogs and ensure seamless data flow between partners.",
+        title: "Integrated Commercial Explosives Logistics",
+        description: "Providing door to door or port to port services tailored to client requirements for commercial explosives materials.",
         icon: "data",
       },
       {
-        title: "Fleet Tracking System",
-        description: "GPS enabled fleet monitoring providing real time location, route optimization, and safety compliance tracking for all transport vehicles.",
-        icon: "tracking",
+        title: "Service Excellence Commitment",
+        description: "High commitment to service quality that ensures security in every logistics activity across all operations.",
+        icon: "warehouse",
       },
       {
-        title: "Intermodal Network",
-        description: "Integrated transport coordination across road, sea, and rail modes with centralized dispatch and scheduling management.",
-        icon: "network",
+        title: "Logistics Fleet Security System",
+        description: "Implementation of occupational health and safety procedures that serve as the fundamental guideline for all logistics activities.",
+        icon: "tracking",
       },
     ],
     stats: [
@@ -341,7 +340,7 @@ const en: Translations = {
         "Cilandak Barat, Cilandak",
         "Jakarta Selatan 12430",
       ],
-      email: "infogbn@gardubnusa.com",
+      email: "admin@grdbnusa.com",
       phone: "+62 21 7599 8000",
       operationalLabel: "Operational Office",
       operationalAddress: [
@@ -367,7 +366,7 @@ const en: Translations = {
         links: [
           { label: "Freight Forwarding", href: "#services" },
           { label: "Explosives Transport", href: "#services" },
-          { label: "Production & Operations", href: "#services" },
+          { label: "Health & Safety", href: "#services" },
           { label: "Warehouse Solutions", href: "#fleet" },
         ],
       },
@@ -446,8 +445,8 @@ const id: Translations = {
     headline: "Fondasi dari",
     headlineHighlight: "Ekosistem Nuskara",
     description: [
-      "Didirikan pada tahun 2013, PT Garuda Bakti Nusantara merupakan perusahaan fondasi dari grup Nuskara. Sebagai entitas perintis, GBN meletakkan dasar bagi ekosistem pertambangan terintegrasi yang kini mencakup 8 anak perusahaan di seluruh Indonesia.",
-      "Dengan fokus pada keandalan, keselamatan, dan keunggulan operasional, GBN telah membangun jaringan logistik komprehensif yang mendukung seluruh rantai pasok pertambangan, dari pengadaan material hingga pengiriman akhir.",
+      "Didirikan pada tahun 2013, PT Garuda Bakti Nusantara merupakan perusahaan fondasi dari grup Nuskara. Berlisensi dari Kepolisian Republik Indonesia, GBN memiliki praktek yang konsisten dalam jaminan keamanan dan keselamatan untuk penggunaan armada logistik.",
+      "Mitra logistik bagi perusahaan di industri pertambangan umum untuk jasa logistik bahan peledak komersial, GBN menawarkan solusi logistik terpadu bagi perusahaan migas di Indonesia terutama dalam kegiatan produksi dan eksplorasi. Pengurusan izin logistik dan transportasi di seluruh Indonesia.",
     ],
     stats: [
       { value: 2013, suffix: "", label: "Didirikan" },
@@ -498,14 +497,13 @@ const id: Translations = {
         ],
       },
       {
-        title: "Produksi & Operasi",
+        title: "Keamanan dan Keselamatan Kerja",
         description:
-          "Operator resmi dalam produksi dan transportasi bahan peledak komersial sejak 2014. Manajemen rantai pasok dari hulu ke hilir.",
+          "Konsistensi selama lebih dari 10 tahun dalam implementasi prinsip K3 dalam jasa transportasi bahan peledak komersial.",
         bullets: [
-          "Operator produksi bahan peledak berizin",
-          "Integrasi manajemen rantai pasok",
-          "Kontrol kualitas dan kepatuhan",
-          "Cakupan distribusi nasional",
+          "Konsistensi implementasi K3 dalam transportasi bahan peledak selama lebih dari satu dekade",
+          "Kontrol kualitas keamanan logistik dan kepatuhan regulasi",
+          "Penerapan audit internal dalam pelaksanaan jaminan prinsip K3",
         ],
       },
     ],
@@ -553,24 +551,24 @@ const id: Translations = {
       "Operasi kami digerakkan oleh sistem manajemen canggih yang memastikan efisiensi, akurasi, dan visibilitas real time di seluruh rantai pasok.",
     systems: [
       {
-        title: "Warehouse Management System",
-        description: "Menyediakan manajemen level inventaris yang akurat dan pelaporan komprehensif untuk seluruh operasi pergudangan di semua lokasi.",
-        icon: "warehouse",
+        title: "Jaringan Intermodal Logistik Pertambangan",
+        description: "Memiliki jaringan vendor strategis untuk penyediaan kombinasi armada transportasi dan handling di area Sumatera, Kalimantan dan Sulawesi.",
+        icon: "network",
       },
       {
-        title: "Electronic Data Interchange",
-        description: "Pemrosesan pesanan terkomputerisasi dengan sistem kontrol real time yang mencegah backlog dan memastikan aliran data tanpa hambatan antar mitra.",
+        title: "Sistim Pelayanan Logistik Bahan Peledak Komersial Terpadu",
+        description: "Menyediakan layanan door to door atau port to port yang disesuaikan dengan kebutuhan client.",
         icon: "data",
       },
       {
-        title: "Sistem Pelacakan Armada",
-        description: "Pemantauan armada berbasis GPS yang menyediakan lokasi real time, optimalisasi rute, dan pelacakan kepatuhan keselamatan untuk semua kendaraan transportasi.",
-        icon: "tracking",
+        title: "Komitmen Layanan Prima",
+        description: "Komitmen yang tinggi terhadap kualitas layanan yang menjamin keamanan dalam setiap kegiatan logistik.",
+        icon: "warehouse",
       },
       {
-        title: "Jaringan Intermodal",
-        description: "Koordinasi transportasi terintegrasi lintas moda darat, laut, dan kereta api dengan dispatch dan manajemen penjadwalan terpusat.",
-        icon: "network",
+        title: "Sistim Keamanan Armada Logistik",
+        description: "Penerapan prosedur keamanan dan keselamatan kerja yang telah menjadi pedoman dasar penyediaan seluruh kegiatan logistik.",
+        icon: "tracking",
       },
     ],
     stats: [
@@ -634,7 +632,7 @@ const id: Translations = {
         "Cilandak Barat, Cilandak",
         "Jakarta Selatan 12430",
       ],
-      email: "infogbn@gardubnusa.com",
+      email: "admin@grdbnusa.com",
       phone: "+62 21 7599 8000",
       operationalLabel: "Kantor Operasional",
       operationalAddress: [
@@ -660,7 +658,7 @@ const id: Translations = {
         links: [
           { label: "Freight Forwarding", href: "#services" },
           { label: "Transportasi Handak", href: "#services" },
-          { label: "Produksi & Operasi", href: "#services" },
+          { label: "K3", href: "#services" },
           { label: "Solusi Pergudangan", href: "#fleet" },
         ],
       },
