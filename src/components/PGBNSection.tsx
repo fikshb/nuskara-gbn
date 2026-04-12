@@ -10,42 +10,131 @@ const TEAL = "#1A5C5A";
 const TEAL_LIGHT = "#2D8B86";
 const TEAL_ACCENT = "#4DB8B0";
 
-/* Port locations - user-verified coordinates via map-tool */
-const ports = [
-  { x: 27.7, y: 70.5, name: "Jakarta", main: true },
-  { x: 47.8, y: 44.1, name: "Balikpapan", main: false },
-  { x: 23.2, y: 54.2, name: "Palembang", main: false },
-  { x: 43.2, y: 53.7, name: "Banjarmasin", main: false },
-  { x: 54.4, y: 64.6, name: "Makassar", main: false },
-  { x: 39.4, y: 74.1, name: "Surabaya", main: false },
-  { x: 79.3, y: 41.6, name: "Sorong", main: false },
+/* 21 Port locations across 3 shipping lines + main route */
+interface PortDef {
+  x: number;
+  y: number;
+  name: string;
+  main?: boolean;
+  line: 0 | 1 | 2 | 3; // 0=main, 1=Sumatera, 2=Kalimantan+Papua, 3=Sulawesi
+}
+
+const ports: PortDef[] = [
+  // Line 0 — Main route: Jakarta → Surabaya → NTB → Kupang
+  { x: 27.7, y: 70.5, name: "Jakarta", main: true, line: 0 },
+  { x: 36, y: 73, name: "Surabaya", line: 0 },
+  { x: 48.5, y: 82, name: "NTB", line: 0 },
+  { x: 55.5, y: 84, name: "Kupang", line: 0 },
+
+  // Line 1 — Sumatera
+  { x: 11.5, y: 19, name: "Aceh", line: 1 },
+  { x: 14, y: 27, name: "Medan", line: 1 },
+
+  // Line 2 — Kalimantan
+  { x: 33, y: 52, name: "Pontianak", line: 2 },
+  { x: 42.5, y: 58, name: "Banjarmasin", line: 2 },
+  { x: 45, y: 44, name: "Balikpapan", line: 2 },
+  { x: 46, y: 39, name: "Samarinda", line: 2 },
+  { x: 47.5, y: 35, name: "Bontang", line: 2 },
+  { x: 46.5, y: 28, name: "Berau", line: 2 },
+  { x: 44, y: 32, name: "Melipau", line: 2 },
+  { x: 46, y: 21, name: "Tarakan", line: 2 },
+
+  // Line 2 branch — Papua
+  { x: 74, y: 34, name: "Sorong", line: 2 },
+  { x: 72, y: 40, name: "Bintuni", line: 2 },
+  { x: 78, y: 50, name: "Timika", line: 2 },
+
+  // Line 3 — Sulawesi
+  { x: 52, y: 39, name: "Palu", line: 3 },
+  { x: 49, y: 58, name: "Makassar", line: 3 },
+  { x: 56.5, y: 27, name: "Bitung", line: 3 },
+  { x: 55.5, y: 48, name: "Kendari", line: 3 },
 ];
 
-/* Sea routes - multi-segment curves avoiding landmass, following real waterways */
+/* Sea routes — curves following real waterways */
 const seaRoutes = [
+  // Main route: Jakarta → Surabaya → NTB → Kupang
   {
-    // Jakarta → Balikpapan: north into Java Sea, then NE along east Kalimantan coast
-    path: "M 27.7 70.5 C 30 66, 34 62, 38 60 C 42 58, 46 52, 47.8 44.1",
-    dur: "6s",
+    path: "M 27.7 70.5 C 31 72, 33 73, 36 73",
+    dur: "4s",
     delay: 0,
   },
   {
-    // Jakarta → Palembang: NW through Sunda Strait, hugging west coast
-    path: "M 27.7 70.5 C 25 67, 22 62, 23.2 54.2",
+    path: "M 36 73 C 40 75, 44 79, 48.5 82",
     dur: "4.5s",
+    delay: 0.5,
+  },
+  {
+    path: "M 48.5 82 C 51 83, 53 84, 55.5 84",
+    dur: "3s",
+    delay: 1,
+  },
+  // Line 1: Jakarta → Medan → Aceh
+  {
+    path: "M 27.7 70.5 C 24 64, 19 50, 16 38 C 15 33, 14 30, 14 27",
+    dur: "7s",
     delay: 1.5,
   },
   {
-    // Banjarmasin → Makassar: south through Makassar Strait (water between Kalimantan & Sulawesi)
-    path: "M 43.2 53.7 C 45 57, 48 62, 50 65 C 51 66, 53 66, 54.4 64.6",
+    path: "M 14 27 C 13 24, 12 22, 11.5 19",
+    dur: "3s",
+    delay: 3,
+  },
+  // Line 2: Jakarta → Pontianak → Banjarmasin → Balikpapan
+  {
+    path: "M 27.7 70.5 C 29 66, 31 60, 33 52",
+    dur: "5s",
+    delay: 2,
+  },
+  {
+    path: "M 33 52 C 36 54, 39 56, 42.5 58",
+    dur: "3.5s",
+    delay: 3,
+  },
+  {
+    path: "M 42.5 58 C 43 54, 44 49, 45 44",
+    dur: "4s",
+    delay: 3.5,
+  },
+  // Balikpapan → Samarinda → Bontang → Melipau → Berau → Tarakan
+  {
+    path: "M 45 44 C 45.5 42, 46 40, 46 39 C 46.5 37, 47 36, 47.5 35 C 46.5 34, 45 33, 44 32 C 44.5 31, 45.5 29, 46.5 28 C 46.3 25, 46.1 23, 46 21",
+    dur: "8s",
+    delay: 4,
+  },
+  // Tarakan → Sorong → Bintuni → Timika (Papua branch)
+  {
+    path: "M 46 21 C 52 22, 60 25, 68 30 C 71 32, 73 33, 74 34",
+    dur: "6s",
+    delay: 5,
+  },
+  {
+    path: "M 74 34 C 73 36, 72 38, 72 40",
+    dur: "3s",
+    delay: 6,
+  },
+  {
+    path: "M 72 40 C 74 43, 76 46, 78 50",
+    dur: "3.5s",
+    delay: 6.5,
+  },
+  // Line 3: Makassar → Palu → Bitung
+  {
+    path: "M 49 58 C 50 52, 51 46, 52 39",
     dur: "4.5s",
     delay: 3,
   },
   {
-    // Surabaya → Sorong: east past Java, south of Sulawesi, through Banda Sea, up to Papua
-    path: "M 39.4 74.1 C 44 76, 50 75, 55 73 C 60 71, 63 67, 66 63 C 70 57, 75 49, 79.3 41.6",
-    dur: "9s",
-    delay: 2,
+    path: "M 52 39 C 53 35, 55 30, 56.5 27",
+    dur: "4s",
+    delay: 4,
+  },
+  // Palu → Kendari
+  {
+    path: "M 52 39 C 53 42, 54 45, 55.5 48",
+    dur: "3.5s",
+    delay: 4.5,
   },
 ];
 
@@ -199,100 +288,103 @@ function ShippingRouteMap() {
       </svg>
 
       {/* Port dots - HTML positioned with CSS % for perfect circles */}
-      {ports.map((port, i) => (
-        <div
-          key={`port-${i}`}
-          className="absolute"
-          style={{ left: `${port.x}%`, top: `${port.y}%`, transform: "translate(-50%, -50%)" }}
-        >
-          {/* Outer glow */}
-          <motion.div
-            className="absolute rounded-full"
-            style={{
-              width: port.main ? 32 : 20,
-              height: port.main ? 32 : 20,
-              left: -(port.main ? 16 : 10),
-              top: -(port.main ? 16 : 10),
-              backgroundColor: `${TEAL_ACCENT}15`,
-            }}
-            initial={{ scale: 0 }}
-            animate={inView ? { scale: 1 } : { scale: 0 }}
-            transition={{ delay: 0.8 + i * 0.12, type: "spring" }}
-          />
-          {/* Port dot */}
-          <motion.div
-            className="relative rounded-full border-2"
-            style={{
-              width: port.main ? 14 : 10,
-              height: port.main ? 14 : 10,
-              marginLeft: -(port.main ? 7 : 5),
-              marginTop: -(port.main ? 7 : 5),
-              backgroundColor: port.main ? TEAL_ACCENT : TEAL_LIGHT,
-              borderColor: port.main ? TEAL_ACCENT : `${TEAL_LIGHT}80`,
-              boxShadow: `0 0 ${port.main ? 12 : 6}px ${port.main ? TEAL_ACCENT : TEAL_LIGHT}60`,
-            }}
-            initial={{ scale: 0, opacity: 0 }}
-            animate={inView ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
-            transition={{ delay: 0.6 + i * 0.12, duration: 0.4, type: "spring" }}
-          />
-          {/* Sonar pulse for main port */}
-          {port.main && inView && (
-            <>
-              <motion.div
-                className="absolute rounded-full border-2"
-                style={{
-                  width: 14, height: 14, left: -7, top: -7,
-                  borderColor: TEAL_ACCENT,
-                }}
-                animate={{ scale: [1, 3], opacity: [0.5, 0] }}
-                transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut" }}
-              />
-              <motion.div
-                className="absolute rounded-full border"
-                style={{
-                  width: 14, height: 14, left: -7, top: -7,
-                  borderColor: TEAL_ACCENT,
-                }}
-                animate={{ scale: [1, 3], opacity: [0.3, 0] }}
-                transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut", delay: 1.2 }}
-              />
-            </>
-          )}
-          {/* City label */}
-          <motion.span
-            className="absolute whitespace-nowrap text-[10px] sm:text-xs font-bold"
-            style={{
-              color: TEAL_ACCENT,
-              left: port.main ? 14 : 10,
-              top: port.main ? -14 : (i % 2 === 0 ? -16 : 6),
-              textShadow: `0 0 8px ${TEAL}`,
-            }}
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 0.85 } : { opacity: 0 }}
-            transition={{ delay: 1.2 + i * 0.12, duration: 0.5 }}
+      {ports.map((port, i) => {
+        const dotDelay = 0.6 + i * 0.06;
+        return (
+          <div
+            key={`port-${i}`}
+            className="absolute"
+            style={{ left: `${port.x}%`, top: `${port.y}%`, transform: "translate(-50%, -50%)" }}
           >
-            {port.name}
-          </motion.span>
-          {/* HQ badge */}
-          {port.main && (
+            {/* Outer glow */}
+            <motion.div
+              className="absolute rounded-full"
+              style={{
+                width: port.main ? 32 : 18,
+                height: port.main ? 32 : 18,
+                left: -(port.main ? 16 : 9),
+                top: -(port.main ? 16 : 9),
+                backgroundColor: `${TEAL_ACCENT}15`,
+              }}
+              initial={{ scale: 0 }}
+              animate={inView ? { scale: 1 } : { scale: 0 }}
+              transition={{ delay: dotDelay + 0.2, type: "spring" }}
+            />
+            {/* Port dot */}
+            <motion.div
+              className="relative rounded-full border-2"
+              style={{
+                width: port.main ? 14 : 8,
+                height: port.main ? 14 : 8,
+                marginLeft: -(port.main ? 7 : 4),
+                marginTop: -(port.main ? 7 : 4),
+                backgroundColor: port.main ? TEAL_ACCENT : TEAL_LIGHT,
+                borderColor: port.main ? TEAL_ACCENT : `${TEAL_LIGHT}80`,
+                boxShadow: `0 0 ${port.main ? 12 : 5}px ${port.main ? TEAL_ACCENT : TEAL_LIGHT}60`,
+              }}
+              initial={{ scale: 0, opacity: 0 }}
+              animate={inView ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
+              transition={{ delay: dotDelay, duration: 0.4, type: "spring" }}
+            />
+            {/* Sonar pulse for main port */}
+            {port.main && inView && (
+              <>
+                <motion.div
+                  className="absolute rounded-full border-2"
+                  style={{
+                    width: 14, height: 14, left: -7, top: -7,
+                    borderColor: TEAL_ACCENT,
+                  }}
+                  animate={{ scale: [1, 3], opacity: [0.5, 0] }}
+                  transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut" }}
+                />
+                <motion.div
+                  className="absolute rounded-full border"
+                  style={{
+                    width: 14, height: 14, left: -7, top: -7,
+                    borderColor: TEAL_ACCENT,
+                  }}
+                  animate={{ scale: [1, 3], opacity: [0.3, 0] }}
+                  transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut", delay: 1.2 }}
+                />
+              </>
+            )}
+            {/* City label - hidden on mobile for non-main ports to avoid clutter */}
             <motion.span
-              className="absolute whitespace-nowrap text-[8px] sm:text-[9px] font-extrabold tracking-wider px-2 py-0.5 rounded"
+              className={`absolute whitespace-nowrap font-bold ${port.main ? "text-[10px] sm:text-xs" : "text-[8px] sm:text-[10px] hidden sm:block"}`}
               style={{
                 color: TEAL_ACCENT,
-                backgroundColor: `${TEAL}cc`,
-                border: `1px solid ${TEAL_ACCENT}40`,
-                left: 14,
-                top: 0,
+                left: port.main ? 14 : 8,
+                top: port.main ? -14 : -12,
+                textShadow: `0 0 8px ${TEAL}`,
               }}
               initial={{ opacity: 0 }}
-              animate={inView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ delay: 1.8, duration: 0.5 }}
+              animate={inView ? { opacity: port.main ? 0.9 : 0.7 } : { opacity: 0 }}
+              transition={{ delay: dotDelay + 0.4, duration: 0.5 }}
             >
-              HQ PORT
+              {port.name}
             </motion.span>
-          )}
-        </div>
-      ))}
+            {/* HQ badge */}
+            {port.main && (
+              <motion.span
+                className="absolute whitespace-nowrap text-[8px] sm:text-[9px] font-extrabold tracking-wider px-2 py-0.5 rounded"
+                style={{
+                  color: TEAL_ACCENT,
+                  backgroundColor: `${TEAL}cc`,
+                  border: `1px solid ${TEAL_ACCENT}40`,
+                  left: 14,
+                  top: 0,
+                }}
+                initial={{ opacity: 0 }}
+                animate={inView ? { opacity: 1 } : { opacity: 0 }}
+                transition={{ delay: 1.8, duration: 0.5 }}
+              >
+                HQ PORT
+              </motion.span>
+            )}
+          </div>
+        );
+      })}
 
       {/* Edge vignette for depth */}
       <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: "inset 0 0 60px 20px #071918" }} />
