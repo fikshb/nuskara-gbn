@@ -21,118 +21,118 @@ interface PortDef {
 
 const ports: PortDef[] = [
   // Line 0 — Main route: Jakarta → Surabaya → NTB → Kupang
-  { x: 27.7, y: 70.5, name: "Jakarta", main: true, line: 0 },
-  { x: 36, y: 73, name: "Surabaya", line: 0 },
-  { x: 48.5, y: 82, name: "NTB", line: 0 },
-  { x: 55.5, y: 84, name: "Kupang", line: 0 },
+  { x: 27.6, y: 70.8, name: "Jakarta", main: true, line: 0 },
+  { x: 38.8, y: 75.8, name: "Surabaya", line: 0 },
+  { x: 47.4, y: 83.0, name: "NTB", line: 0 },
+  { x: 63.2, y: 91.4, name: "Kupang", line: 0 },
 
   // Line 1 — Sumatera
-  { x: 11.5, y: 19, name: "Aceh", line: 1 },
-  { x: 14, y: 27, name: "Medan", line: 1 },
+  { x: 4.2, y: 11.3, name: "Aceh", line: 1 },
+  { x: 9.7, y: 18.1, name: "Medan", line: 1 },
 
   // Line 2 — Kalimantan
-  { x: 33, y: 52, name: "Pontianak", line: 2 },
-  { x: 42.5, y: 58, name: "Banjarmasin", line: 2 },
-  { x: 45, y: 44, name: "Balikpapan", line: 2 },
-  { x: 46, y: 39, name: "Samarinda", line: 2 },
-  { x: 47.5, y: 35, name: "Bontang", line: 2 },
-  { x: 46.5, y: 28, name: "Berau", line: 2 },
-  { x: 44, y: 32, name: "Melipau", line: 2 },
-  { x: 46, y: 21, name: "Tarakan", line: 2 },
+  { x: 33.1, y: 37.7, name: "Pontianak", line: 2 },
+  { x: 44.4, y: 54.0, name: "Banjarmasin", line: 2 },
+  { x: 47.3, y: 45.1, name: "Balikpapan", line: 2 },
+  { x: 48.3, y: 39.8, name: "Samarinda", line: 2 },
+  { x: 49.6, y: 34.2, name: "Bontang", line: 2 },
+  { x: 49.4, y: 26.1, name: "Berau", line: 2 },
+  { x: 49.4, y: 22.2, name: "Malinau", line: 2 },
+  { x: 50.2, y: 20.7, name: "Tarakan", line: 2 },
 
   // Line 2 branch — Papua
-  { x: 74, y: 34, name: "Sorong", line: 2 },
-  { x: 72, y: 40, name: "Bintuni", line: 2 },
-  { x: 78, y: 50, name: "Timika", line: 2 },
+  { x: 79.8, y: 41.6, name: "Sorong", line: 2 },
+  { x: 84.0, y: 46.8, name: "Bintuni", line: 2 },
+  { x: 89.8, y: 60.1, name: "Timika", line: 2 },
 
   // Line 3 — Sulawesi
-  { x: 52, y: 39, name: "Palu", line: 3 },
-  { x: 49, y: 58, name: "Makassar", line: 3 },
-  { x: 56.5, y: 27, name: "Bitung", line: 3 },
-  { x: 55.5, y: 48, name: "Kendari", line: 3 },
+  { x: 54.9, y: 40.5, name: "Palu", line: 3 },
+  { x: 54.2, y: 64.2, name: "Makassar", line: 3 },
+  { x: 66.1, y: 28.3, name: "Bitung", line: 3 },
+  { x: 60.2, y: 56.8, name: "Kendari", line: 3 },
 ];
 
-/* Sea routes — curves following real waterways */
+/* Sea routes — curves following real waterways, matched to port coords */
 const seaRoutes = [
   // Main route: Jakarta → Surabaya → NTB → Kupang
   {
-    path: "M 27.7 70.5 C 31 72, 33 73, 36 73",
+    path: "M 27.6 70.8 C 31 72, 35 74, 38.8 75.8",
     dur: "4s",
     delay: 0,
   },
   {
-    path: "M 36 73 C 40 75, 44 79, 48.5 82",
+    path: "M 38.8 75.8 C 42 78, 44 80, 47.4 83",
     dur: "4.5s",
     delay: 0.5,
   },
   {
-    path: "M 48.5 82 C 51 83, 53 84, 55.5 84",
-    dur: "3s",
+    path: "M 47.4 83 C 52 86, 58 89, 63.2 91.4",
+    dur: "4s",
     delay: 1,
   },
   // Line 1: Jakarta → Medan → Aceh
   {
-    path: "M 27.7 70.5 C 24 64, 19 50, 16 38 C 15 33, 14 30, 14 27",
+    path: "M 27.6 70.8 C 22 60, 16 42, 9.7 18.1",
     dur: "7s",
     delay: 1.5,
   },
   {
-    path: "M 14 27 C 13 24, 12 22, 11.5 19",
+    path: "M 9.7 18.1 C 8 16, 6 13, 4.2 11.3",
     dur: "3s",
     delay: 3,
   },
   // Line 2: Jakarta → Pontianak → Banjarmasin → Balikpapan
   {
-    path: "M 27.7 70.5 C 29 66, 31 60, 33 52",
+    path: "M 27.6 70.8 C 29 60, 31 48, 33.1 37.7",
     dur: "5s",
     delay: 2,
   },
   {
-    path: "M 33 52 C 36 54, 39 56, 42.5 58",
-    dur: "3.5s",
+    path: "M 33.1 37.7 C 36 42, 40 48, 44.4 54",
+    dur: "4s",
     delay: 3,
   },
   {
-    path: "M 42.5 58 C 43 54, 44 49, 45 44",
-    dur: "4s",
+    path: "M 44.4 54 C 45 51, 46 48, 47.3 45.1",
+    dur: "3.5s",
     delay: 3.5,
   },
-  // Balikpapan → Samarinda → Bontang → Melipau → Berau → Tarakan
+  // Balikpapan → Samarinda → Bontang → Berau → Malinau → Tarakan
   {
-    path: "M 45 44 C 45.5 42, 46 40, 46 39 C 46.5 37, 47 36, 47.5 35 C 46.5 34, 45 33, 44 32 C 44.5 31, 45.5 29, 46.5 28 C 46.3 25, 46.1 23, 46 21",
+    path: "M 47.3 45.1 C 47.8 42, 48.3 39.8, 48.3 39.8 C 49 37, 49.6 34.2, 49.6 34.2 C 49.5 30, 49.4 26.1, 49.4 26.1 C 49.4 24, 49.4 22.2, 49.4 22.2 C 49.8 21.5, 50.2 20.7, 50.2 20.7",
     dur: "8s",
     delay: 4,
   },
   // Tarakan → Sorong → Bintuni → Timika (Papua branch)
   {
-    path: "M 46 21 C 52 22, 60 25, 68 30 C 71 32, 73 33, 74 34",
+    path: "M 50.2 20.7 C 58 24, 68 30, 79.8 41.6",
     dur: "6s",
     delay: 5,
   },
   {
-    path: "M 74 34 C 73 36, 72 38, 72 40",
+    path: "M 79.8 41.6 C 81 43, 83 45, 84 46.8",
     dur: "3s",
     delay: 6,
   },
   {
-    path: "M 72 40 C 74 43, 76 46, 78 50",
+    path: "M 84 46.8 C 86 51, 88 56, 89.8 60.1",
     dur: "3.5s",
     delay: 6.5,
   },
   // Line 3: Makassar → Palu → Bitung
   {
-    path: "M 49 58 C 50 52, 51 46, 52 39",
+    path: "M 54.2 64.2 C 54.5 55, 55 48, 54.9 40.5",
     dur: "4.5s",
     delay: 3,
   },
   {
-    path: "M 52 39 C 53 35, 55 30, 56.5 27",
+    path: "M 54.9 40.5 C 58 36, 62 32, 66.1 28.3",
     dur: "4s",
     delay: 4,
   },
   // Palu → Kendari
   {
-    path: "M 52 39 C 53 42, 54 45, 55.5 48",
+    path: "M 54.9 40.5 C 56 45, 58 51, 60.2 56.8",
     dur: "3.5s",
     delay: 4.5,
   },
